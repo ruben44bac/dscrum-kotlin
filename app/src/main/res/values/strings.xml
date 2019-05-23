@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dscrum</string>
+    <string name="ingresa">Ingresa</string>
+    <string name="username"/>
 </resources>

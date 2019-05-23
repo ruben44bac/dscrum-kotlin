@@ -5,22 +5,56 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity" android:background="#00000000">
 
     <EditText
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password_et" android:layout_marginEnd="2dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="2dp" android:layout_marginStart="2dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="2dp"
+            android:layout_marginBottom="364dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.072"
+            app:layout_constraintTop_toBottomOf="@+id/username_et"
+            android:autofillHints="" android:hint="Password"/>
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:inputType="textNoSuggestions|text"
+            android:text="@string/username"
+            android:ems="10"
+            android:id="@+id/username_et" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+            android:autofillHints="" android:hint="Username" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="242dp" android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/password_et"/>
+    <TextView
+            android:text="@string/ingresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            tools:layout_editor_absoluteY="343dp" android:id="@+id/editText2" android:layout_marginEnd="8dp"
+            android:id="@+id/textView2" android:visibility="visible"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="30sp" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/username_et" app:layout_constraintHorizontal_bias="0.307"
+            app:layout_constraintVertical_bias="0.67"/>
+    <Button
+            android:text="Login"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:id="@+id/button" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/password_et" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            app:layout_constraintHorizontal_bias="0.554"/>
-    <TextView
-            android:text="Ingresa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" tools:layout_editor_absoluteY="112dp"
-            tools:layout_editor_absoluteX="76dp" android:id="@+id/textView2"/>
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintVertical_bias="0.29" android:textColor="#FFFFFFFF" android:background="#FF9800"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
