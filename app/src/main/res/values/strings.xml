@@ -1,5 +1,18 @@
 <resources>
-    <string name="app_name">dscrum</string>
-    <string name="ingresa">Ingresa</string>
-    <string name="username"/>
+    <string name="app_name">Dscrum-k</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Ingresa</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Username inválido</string>
+    <string name="invalid_password">Contraseña de 5 a 10 caracteres</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>
