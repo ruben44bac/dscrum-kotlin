@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.santiago.dscrum_k.Activities.ui.login.LoginActivity
 import com.santiago.dscrum_k.Api.*
 import com.santiago.dscrum_k.Fragments.HomeFragment
@@ -19,12 +20,15 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import org.phoenixframework.PhxChannel
+import org.phoenixframework.PhxSocket
 import java.io.IOException
 import kotlin.concurrent.thread
+import kotlin.collections.Map as Map1
 
 class MainActivity : AppCompatActivity() {
 
     var user = user_response()
+    var socket = PhxSocket("", hashMapOf("" to ""))
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -121,18 +125,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun socket(token: String){
-        val socket = conexion_socket(token)
-        println(socket)
+        socket = conexion_socket(token)
         val chatroom = socket.channel("history:${user.team_id}")
 
         chatroom.on("new_story") {
             // `it` is a PhxMessage object
-            println("NUEVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         }
 
         chatroom.join()
             .receive("ok") { println("ME HE UNIDO MUY CHIDO") }
             .receive("error") { println("ESTOY FALLANDO AYUDAME PLOX") }
-    }
 
+        val values = mutableMapOf("index" to 0, "size" to 10)
+
+        chatroom.push("list", values)
+            .receive("ok", callback = {
+                println(it)
+            })
+            .receive("error", {
+                println(it)
+            })
+    }
 }
