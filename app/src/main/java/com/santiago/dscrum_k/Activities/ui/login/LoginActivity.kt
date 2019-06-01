@@ -1,6 +1,7 @@
 package com.santiago.dscrum_k.Activities.ui.login
 
 import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,12 +11,25 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.santiago.dscrum_k.Api.post
 
 import com.santiago.dscrum_k.R
+import com.santiago.dscrum_k.Utils.get_token
+import com.santiago.dscrum_k.Utils.set_token
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
+import com.google.gson.Gson
+import com.santiago.dscrum_k.Api.login_response
+import kotlin.concurrent.thread
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
+        var session = getSharedPreferences("dscrum", Context.MODE_PRIVATE)
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
@@ -37,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
             println("EN EL OBSERVABLE")
+            println(get_token(session))
             // disable login button unless both username / password is valid
             login.isEnabled = loginState.isDataValid
 
@@ -57,12 +73,36 @@ class LoginActivity : AppCompatActivity() {
                 showLoginFailed(loginResult.error)
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+                val Json = """
+                {
+                "username": "${username.text}",
+                "password": "${password.text}"
+                }
+            """.trimIndent()
+                post("auth", Json)!!
+                    .enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            println(e)
+                        }
+                        override fun onResponse(call: Call, response: Response) {
+                            val data_response = response.body()?.string()
+                            println(data_response)
+                            val res =  Gson().fromJson(data_response, login_response::class.java)
+                            println(res)
+                            when(res.error) {
+                                null -> {
+                                    set_token(session, res.token!!)
+                                    updateUiWithUser(username.text.toString())
+                                }
+                                else -> { badValues(res.error!!) }
+                            }
+                        }
+                    })
 
-            //Complete and destroy login activity once successful
-            finish()
+            }
+
         })
 
         username.afterTextChanged {
@@ -98,15 +138,29 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+    private fun updateUiWithUser(username: String) {
+        thread (name = "MensajeBien", priority = 1) {
+            runOnUiThread {
+                Toast.makeText(
+                    applicationContext,
+                    "Bienvenido $username",
+                    Toast.LENGTH_LONG
+                ).show()
+                this.finish()
+            }
+        }
+    }
+
+    private fun badValues(error: String) {
+        thread (name = "MensajeBien", priority = 1){
+            runOnUiThread {
+                Toast.makeText(applicationContext,
+                    error,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
