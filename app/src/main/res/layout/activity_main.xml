@@ -20,8 +20,11 @@
             android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cardview_light_background"
+            android:background="#191919"
             android:layout_alignParentBottom="true"
+            app:elevation="@dimen/cardview_compat_inset_shadow"
+            app:itemIconTint="#ECEFF1"
+            app:itemTextColor="#ECEFF1"
             app:menu="@menu/bottom_nav_menu"/>
 
 </RelativeLayout>

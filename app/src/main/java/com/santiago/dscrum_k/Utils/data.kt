@@ -30,5 +30,4 @@ fun get_token(session: SharedPreferences) : String {
     return session.getString("token", "")
 }
 
-
-
+data class pag(var index: Int, var size: Int, var total: Int)

@@ -15,4 +15,3 @@ data class login_response(
     var token: String? = null,
     var error: String? = null
 )
-

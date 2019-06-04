@@ -16,18 +16,4 @@ fun conexion_socket(token: String): PhxSocket {
     socket.connect()
     return socket
 
-    // Join channels and listen to events
-    /*
-    val chatroom = socket.channel("history:1")
-
-    chatroom.on("new_story") {
-        // `it` is a PhxMessage object
-        println("NUEVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    }
-
-    chatroom.join()
-        .receive("ok") { println("ME HE UNIDO MUY CHIDO") }
-        .receive("error") { println("ESTOY FALLANDO AYUDAME PLOX") }
-
-    */
 }

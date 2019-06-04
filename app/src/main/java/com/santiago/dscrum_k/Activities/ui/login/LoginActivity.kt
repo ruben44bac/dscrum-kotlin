@@ -88,9 +88,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                         override fun onResponse(call: Call, response: Response) {
                             val data_response = response.body()?.string()
-                            println(data_response)
                             val res =  Gson().fromJson(data_response, login_response::class.java)
-                            println(res)
                             when(res.error) {
                                 null -> {
                                     set_token(session, res.token!!)

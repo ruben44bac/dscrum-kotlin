@@ -15,4 +15,10 @@
     <string name="invalid_username">Username inválido</string>
     <string name="invalid_password">Contraseña de 5 a 10 caracteres</string>
     <string name="login_failed">"Login failed"</string>
+    <string id="title_activity_story_detail" name="title_activity_story_detail">StoryDetailActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>

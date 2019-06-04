@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".Activities.StoryDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:fitsSystemWindows="true"
+            android:layout_height="@dimen/app_bar_height"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:background="#121212"
+    >
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:fitsSystemWindows="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:toolbarId="@+id/toolbar_title"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:contentScrim="?attr/colorPrimary">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar_title"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    app:layout_collapseMode="pin"
+                    app:title="titulo"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <com.ramijemli.percentagechartview.PercentageChartView
+                    android:id="@+id/chart_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="35dp"
+                    app:pcv_mode="ring"
+                    app:pcv_orientation="clockwise"
+                    app:pcv_animDuration="90000"
+                    app:pcv_gradientColors="#D500F9 , #7C4DFF , #304FFE"
+                    app:pcv_gradientType="linear"
+                    app:pcv_animInterpolator="bounce"
+                    app:pcv_progress="90"
+                    app:pcv_backgroundBarColor="@color/colorPrimary"
+                    app:pcv_backgroundColor="#121212"
+                    app:pcv_textSize="30dp"
+                    app:pcv_drawBackground="true"
+                    app:pcv_startAngle="90"/>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_story_detail"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_anchor="@id/app_bar"
+            app:layout_anchorGravity="bottom|end"
+            app:srcCompat="@drawable/ic_dashboard"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,9 +7,17 @@
              tools:context=".Fragments.ListStoriesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:id="@+id/stories_grid"
+            android:horizontalSpacing="15dp"
+            android:numColumns="1"
+            android:verticalSpacing="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="55dp"
+            android:padding="10dp"
+    />
 
 </FrameLayout>
