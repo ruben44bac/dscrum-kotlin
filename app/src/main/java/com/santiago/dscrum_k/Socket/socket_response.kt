@@ -47,7 +47,13 @@ data class story_detail_user(
     var difficulty_name: String? = null,
     var id: Int? = null,
     var name: String? = null,
-    var online: String? = null,
+    var online: Boolean? = null,
     var surname: String? = null,
+    var username: String? = null
+)
+
+data class story_detail_user_online(
+    var user_id: Int? = null,
+    var name: String? = null,
     var username: String? = null
 )

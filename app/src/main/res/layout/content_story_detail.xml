@@ -9,8 +9,87 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Activities.StoryDetailActivity">
-    <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView2"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="15dp"
+     >
+
+        <TableLayout
+                android:id="@+id/table_date"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="@color/colorPrimary"
+                android:stretchColumns="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        >
+
+            <TableRow android:layout_width="match_parent"
+                      android:layout_height="250dp"
+            >
+
+                <TextView android:layout_width="180dp"
+                          android:layout_height="match_parent"
+                          android:text="Fecha inicial"
+                          android:textColor="#FFF"
+                          android:paddingRight="30dp"
+                          android:paddingTop="10dp"
+                          android:gravity="right"
+                />
+                <TextView android:layout_width="222dp"
+                          android:layout_height="match_parent"
+                          android:text="10 de Junio del 2019 08:00"
+                          android:textColor="#FFF"
+                          android:padding="10dp"
+                          android:id="@+id/text_date_start"/>
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent"
+                      android:layout_height="250dp">
+
+                <TextView android:layout_width="180dp"
+                          android:layout_height="match_parent"
+                          android:text="Fecha final"
+                          android:textColor="#FFF"
+                          android:paddingRight="30dp"
+                          android:paddingTop="10dp"
+                          android:gravity="right"/>
+
+                <TextView android:layout_width="222dp"
+                          android:layout_height="match_parent"
+                          android:text="10 de Junio del 2019 08:00"
+                          android:textColor="#FFF"
+                          android:padding="10dp"
+                          android:id="@+id/text_date_end"
+                />
+            </TableRow>
+
+        </TableLayout>
+        <TextView android:layout_width="222dp"
+                  android:layout_height="wrap_content"
+                  android:text="Equipo"
+                  android:textColor="#FFF"
+                  android:paddingLeft="30dp"
+                  android:layout_marginTop="85dp"
+                  android:textSize="20dp"
+        />
+
+        <GridView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/team_grid"
+                android:numColumns="1"
+                android:verticalSpacing="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="55dp"
+                android:layout_marginTop="120dp"
+                android:padding="10dp"
+        />
+
+
+    </androidx.cardview.widget.CardView>
 </androidx.core.widget.NestedScrollView>

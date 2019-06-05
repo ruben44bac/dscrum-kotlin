@@ -106,14 +106,15 @@ class MainActivity : AppCompatActivity(), SelectedStoryFragmentDelegate {
         startActivity(intent);
     }
 
-    override fun onSelectedStory(valor: Int) {
+    override fun onSelectedStory(story_id: Int, name: String) {
         val intent = Intent(this@MainActivity, StoryDetailActivity::class.java)
-        intent.putExtra("story_id", valor)
+        intent.putExtra("story_id", story_id)
+        intent.putExtra("name", name)
         startActivity(intent)
     }
 
 }
 
 interface SelectedStoryFragmentDelegate {
-    fun onSelectedStory(valor: Int)
+    fun onSelectedStory(story_id: Int, name: String)
 }

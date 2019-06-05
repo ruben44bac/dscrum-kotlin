@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:background="@drawable/border_item_grid_stories"
+              android:gravity="center"
+              android:paddingTop="15dp"
+              android:paddingBottom="15dp"
+              android:paddingRight="5dp">
+
+    <ImageView
+            android:id="@+id/image_user_team"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+    />
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/username_team"
+                android:text="Nombre"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#FFF"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical|left|start"
+                app:layout_constraintLeft_toRightOf="@+id/image_user_team"
+        />
+        <TextView
+                android:id="@+id/name_team"
+                android:text="Nombre"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical|left|start"
+                app:layout_constraintLeft_toRightOf="@+id/image_user_team"
+                app:layout_constraintTop_toBottomOf="@+id/name_team"
+        />
+        <TextView
+                android:id="@+id/qualify_team"
+                android:text="Calificación: 1"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#FFF"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical|left|start"
+                app:layout_constraintLeft_toRightOf="@+id/image_user_team"
+                app:layout_constraintTop_toBottomOf="@+id/name_team"
+        />
+    </LinearLayout>
+    <View
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/view_online_team"
+            android:background="@drawable/border_image"
+    />
+
+
+</LinearLayout>

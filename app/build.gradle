@@ -43,10 +43,12 @@ dependencies {
     implementation 'com.github.dsrees:JavaPhoenixClient:0.1.4'
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
     implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

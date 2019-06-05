@@ -66,7 +66,18 @@ class ListStoriesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        sockets()
+        when(story_list.count()){
+            0 -> {
+                incializa()
+            }
+            else -> {
+                sockets(false)
+            }
+        }
+    }
+
+    fun incializa(){
+        sockets(true)
         gv = stories_grid as GridView
         adapter = grid_adapter(this.context!!, story_list, delegate!!)
         gv.adapter = adapter
@@ -80,6 +91,7 @@ class ListStoriesFragment : Fragment() {
             override fun onScrollStateChanged(view: AbsListView?, state: Int) {
             }
         })
+
     }
 
     companion object{
@@ -92,8 +104,7 @@ class ListStoriesFragment : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun sockets(){
+    fun sockets(push: Boolean){
         socket = conexion_socket(token)
         channel = socket.channel("history:${team_id}")
         channel.on("new_story") {
@@ -105,7 +116,8 @@ class ListStoriesFragment : Fragment() {
         channel.join()
             .receive("ok") { println("Join channel") }
             .receive("error") { println("error join") }
-        push_stories()
+        if(push)
+            push_stories()
     }
 
     fun push_stories(){
@@ -122,7 +134,7 @@ class ListStoriesFragment : Fragment() {
             })
     }
 
-    class grid_adapter(private var c: Context, private var lista: ArrayList<stories_array>, private var delegate: SelectedStoryFragmentDelegate): BaseAdapter() {
+    private class grid_adapter(private var c: Context, private var lista: ArrayList<stories_array>, private var delegate: SelectedStoryFragmentDelegate): BaseAdapter() {
         override fun getCount(): Int {
             return lista.count()
         }
@@ -145,7 +157,7 @@ class ListStoriesFragment : Fragment() {
             val texto = view!!.findViewById<TextView>(R.id.name)
             texto.text = lista[position].name
             view.setOnClickListener(){
-               delegate.onSelectedStory(lista[position].id!!)
+               delegate.onSelectedStory(lista[position].id!!, lista[position].name!!)
             }
             return view!!
         }
