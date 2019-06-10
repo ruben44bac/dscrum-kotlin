@@ -9,20 +9,32 @@
 
     <ImageView
             android:id="@+id/image_difficulty"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="100dp"
-            android:background="@color/colorAccent"
+            android:background="#121212"
     />
 
-    <TextView
-            android:id="@+id/name"
-            android:layout_width="264dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#FFF"
-            android:padding="5dp"
-            android:gravity = "center_vertical|left|start"
-            app:layout_constraintLeft_toRightOf="@+id/image_difficulty"
-    />
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="272dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="264dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#FFF"
+                android:padding="5dp"
+                android:gravity="center_vertical|left|start"
+                app:layout_constraintLeft_toRightOf="@+id/image_difficulty"
+        />
+        <TextView
+                android:text="TextView"
+                android:paddingLeft="5dp"
+                android:textColor="#FFF"
+                android:layout_width="265dp"
+                android:layout_height="wrap_content" android:id="@+id/date_story"/>
+    </LinearLayout>
 
 </LinearLayout>

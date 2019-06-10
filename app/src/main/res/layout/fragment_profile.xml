@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorPrimary"
+             tools:context=".Fragments.ProfileFragment">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+        <ImageView
+                android:id="@+id/image_user_team"
+                android:layout_width="206dp"
+                android:layout_height="196dp"
+                tools:srcCompat="@tools:sample/avatars[12]"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="260dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_height="wrap_content" android:id="@+id/username_profile"
+                android:textColor="@color/button_text_color"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_height="wrap_content" android:id="@+id/name_profile"
+                android:textColor="@color/button_text_color"/>
+        <Button
+                android:text="Cerrar sesión"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                android:textColor="#FFF"
+                android:layout_height="wrap_content" android:id="@+id/logout_profile"
+                android:backgroundTintMode="multiply">
+        </Button>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

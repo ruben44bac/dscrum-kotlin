@@ -38,7 +38,7 @@ data class story_detail_data(
     var difficulty_id: Int? = null,
     var difficulty_name: String? = null,
     var name: String? = null,
-    var status: String? = null,
+    var status: Boolean? = null,
     var users: ArrayList<story_detail_user>? = null
 )
 
@@ -56,4 +56,25 @@ data class story_detail_user_online(
     var user_id: Int? = null,
     var name: String? = null,
     var username: String? = null
+)
+
+data class difficulty_list_response(
+    var data: ArrayList<difficulty_list_data>? = null
+)
+
+data class difficulty_list_data(
+    var id: Int? = null,
+    var name: String? = null
+)
+
+
+data class difficulty_qualify_data(
+    var message: String? = null,
+    var error: String? = null,
+    var close: Boolean? = null,
+    var difficulty: Int? = null
+)
+
+data class difficulty_qualify_response(
+    var data: difficulty_qualify_data? = null
 )

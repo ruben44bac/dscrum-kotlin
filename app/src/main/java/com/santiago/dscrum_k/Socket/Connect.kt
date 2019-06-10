@@ -14,6 +14,14 @@ fun conexion_socket(token: String): PhxSocket {
     socket.onError { throwable, response -> Log.d("Socket Error ${response}", "TAG", throwable) }
 
     socket.connect()
+
+
+
     return socket
+
+}
+
+
+fun show_error(mensaje: String, algo: Any){
 
 }

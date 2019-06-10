@@ -10,17 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fasterxml.jackson.module.kotlin.*
-import com.santiago.dscrum_k.SelectedStoryFragmentDelegate
 
 import com.santiago.dscrum_k.R
 import com.santiago.dscrum_k.Socket.conexion_socket
 import com.santiago.dscrum_k.Socket.stories_array
 import com.santiago.dscrum_k.Socket.stories_response
-import com.santiago.dscrum_k.Utils.addFragmentToActivity
-import com.santiago.dscrum_k.Utils.get_token
-import com.santiago.dscrum_k.Utils.pag
+import com.santiago.dscrum_k.Utils.*
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_list_stories.*
 import org.phoenixframework.PhxChannel
@@ -28,6 +27,10 @@ import org.phoenixframework.PhxSocket
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+
 
 class ListStoriesFragment : Fragment() {
 
@@ -83,7 +86,8 @@ class ListStoriesFragment : Fragment() {
         gv.adapter = adapter
         gv.setOnScrollListener(object: AbsListView.OnScrollListener {
             override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-                if (totalItemCount - visibleItemCount <= firstVisibleItem && adapter.count + story_list.count() <= (page.total + 1)) {
+                println("EN EL PAGINADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                if (totalItemCount - visibleItemCount <= firstVisibleItem && adapter.count + story_list.count() < (page.total)) {
                     page.index ++
                     push_stories()
                 }
@@ -147,14 +151,38 @@ class ListStoriesFragment : Fragment() {
             return position.toLong()
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             var view = convertView
             if(view == null) {
                 view = LayoutInflater.from(c).inflate(R.layout.item_grid_stories, parent, false)
             }
-            val elto = this.getItem(position) as stories_array
             val img = view!!.findViewById<ImageView>(R.id.image_difficulty)
+            if(lista[position].difficulty_id == null){
+
+            } else {
+                Picasso.get()
+                    .load("http://10.0.3.41:4000/api/difficulty-image?id=${lista[position].difficulty_id}")
+                    .into(img)
+            }
+
             val texto = view!!.findViewById<TextView>(R.id.name)
+            when(lista[position].date_end){
+                null -> {
+                    val date = view!!.findViewById<TextView>(R.id.date_story)
+                    date.isVisible = false
+                }
+                else -> {
+                    val date = view!!.findViewById<TextView>(R.id.date_story)
+                    date.isVisible = true
+                    val localDateTime = LocalDateTime.parse(lista[position].date_end)
+                    val formatter = DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
+                    val output = formatter.format(localDateTime)
+                    date.text = output
+                }
+            }
+
+
             texto.text = lista[position].name
             view.setOnClickListener(){
                delegate.onSelectedStory(lista[position].id!!, lista[position].name!!)

@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.santiago.dscrum_k"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -44,7 +44,9 @@ dependencies {
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
     implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.2'
+    implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
+    implementation 'com.github.TutorialsAndroid:KAlertDialog:v15.4.19'
 
 
     testImplementation 'junit:junit:4.12'

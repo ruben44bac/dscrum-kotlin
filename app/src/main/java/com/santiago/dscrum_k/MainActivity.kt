@@ -13,9 +13,9 @@ import com.santiago.dscrum_k.Api.*
 import com.santiago.dscrum_k.Fragments.HomeFragment
 import com.santiago.dscrum_k.Fragments.ListStoriesFragment
 import com.santiago.dscrum_k.Fragments.OptionsFragment
+import com.santiago.dscrum_k.Fragments.ProfileFragment
 import com.santiago.dscrum_k.Socket.conexion_socket
-import com.santiago.dscrum_k.Utils.addFragmentToActivity
-import com.santiago.dscrum_k.Utils.get_token
+import com.santiago.dscrum_k.Utils.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), SelectedStoryFragmentDelegate {
             }
             R.id.navigation_notifications -> {
                 addFragmentToActivity(
-                    getSupportFragmentManager(), OptionsFragment(), R.id.fragmets_view)
+                    getSupportFragmentManager(), ProfileFragment(), R.id.fragmets_view)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity(), SelectedStoryFragmentDelegate {
                 val data_response = response.body()?.string()
                 println(data_response)
                 user =  Gson().fromJson(data_response, user_response::class.java)
+                var session = getSharedPreferences("dscrum", Context.MODE_PRIVATE)
+                set_sesion(user, session)
                 when(user.error) {
                     null -> { /*socket(token)*/  }
                     else -> { badValues() }
@@ -115,6 +117,3 @@ class MainActivity : AppCompatActivity(), SelectedStoryFragmentDelegate {
 
 }
 
-interface SelectedStoryFragmentDelegate {
-    fun onSelectedStory(story_id: Int, name: String)
-}
