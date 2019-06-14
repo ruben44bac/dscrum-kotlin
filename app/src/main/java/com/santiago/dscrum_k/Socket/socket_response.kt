@@ -78,3 +78,27 @@ data class difficulty_qualify_data(
 data class difficulty_qualify_response(
     var data: difficulty_qualify_data? = null
 )
+
+data class  home_data(
+    var last_story_name: String? = null,
+    var story_close: Double? = null,
+    var story_open: Double? = null,
+    var team_name: String? = null
+)
+
+data class home_response(
+    var data: home_data? = null
+)
+
+
+data class mind_response(
+    var data: ArrayList<mind_data>? = null
+)
+
+data class mind_data(
+    var id: Int? = null,
+    var name: String? = null
+)
+
+
+

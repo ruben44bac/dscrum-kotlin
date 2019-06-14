@@ -16,6 +16,7 @@ import com.fasterxml.jackson.module.kotlin.*
 
 import com.santiago.dscrum_k.R
 import com.santiago.dscrum_k.Socket.conexion_socket
+import com.santiago.dscrum_k.Socket.show_error
 import com.santiago.dscrum_k.Socket.stories_array
 import com.santiago.dscrum_k.Socket.stories_response
 import com.santiago.dscrum_k.Utils.*
@@ -79,6 +80,11 @@ class ListStoriesFragment : Fragment() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        socket.disconnect()
+    }
+
     fun incializa(){
         sockets(true)
         gv = stories_grid as GridView
@@ -86,7 +92,6 @@ class ListStoriesFragment : Fragment() {
         gv.adapter = adapter
         gv.setOnScrollListener(object: AbsListView.OnScrollListener {
             override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-                println("EN EL PAGINADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 if (totalItemCount - visibleItemCount <= firstVisibleItem && adapter.count + story_list.count() < (page.total)) {
                     page.index ++
                     push_stories()
@@ -110,6 +115,7 @@ class ListStoriesFragment : Fragment() {
 
     fun sockets(push: Boolean){
         socket = conexion_socket(token)
+        socket.onError { throwable, response -> show_error(view = this.view!!) }
         channel = socket.channel("history:${team_id}")
         channel.on("new_story") {
             val res = mapper.convertValue(it.payload, stories_array::class.java)
@@ -162,7 +168,7 @@ class ListStoriesFragment : Fragment() {
 
             } else {
                 Picasso.get()
-                    .load("http://10.0.3.41:4000/api/difficulty-image?id=${lista[position].difficulty_id}")
+                    .load("$api_url/difficulty-image?id=${lista[position].difficulty_id}")
                     .into(img)
             }
 
@@ -192,25 +198,5 @@ class ListStoriesFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 
-    override fun onPause() {
-        super.onPause()
-        println("EN PAUSA!!!!!!!!")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        this.socket.disconnect()
-        //this.onDestroy()
-        println("EN STOP!!!!!!!!")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        socket.disconnect()
-        println("DESTRUIDO!!!!!!!!")
-    }
 }

@@ -11,11 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.ramotion.fluidslider.FluidSlider
-import com.santiago.dscrum_k.Socket.conexion_socket
-import com.santiago.dscrum_k.Socket.difficulty_list_data
-import com.santiago.dscrum_k.Socket.difficulty_list_response
-import com.santiago.dscrum_k.Socket.difficulty_qualify_response
+import com.santiago.dscrum_k.Socket.*
 import com.santiago.dscrum_k.Utils.CircleTransform
+import com.santiago.dscrum_k.Utils.api_url
 import com.santiago.dscrum_k.Utils.get_token
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_iteration.*
@@ -121,7 +119,7 @@ class IterationActivity : AppCompatActivity() {
     private fun images() {
         runOnUiThread {
             Picasso.get()
-                .load("http://10.0.3.41:4000/api/difficulty-image?id=${difficulty_list[pos_act].id}")
+                .load("$api_url/difficulty-image?id=${difficulty_list[pos_act].id}")
                 .transform(CircleTransform())
                 .into(img)
         }
@@ -129,6 +127,7 @@ class IterationActivity : AppCompatActivity() {
 
     fun sockets(){
         socket = conexion_socket(token)
+        socket.onError { throwable, response -> show_error(view = findViewById(android.R.id.content)) }
         channel = socket.channel("story_detail:${story_id}")
 
         channel.on("close"){

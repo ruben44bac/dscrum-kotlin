@@ -27,6 +27,7 @@ import com.santiago.dscrum_k.Fragments.ListStoriesFragment
 import com.santiago.dscrum_k.R
 import com.santiago.dscrum_k.Socket.*
 import com.santiago.dscrum_k.Utils.CircleTransform
+import com.santiago.dscrum_k.Utils.api_url
 import com.santiago.dscrum_k.Utils.get_token
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_story_detail.*
@@ -102,21 +103,24 @@ class StoryDetailActivity : AppCompatActivity() {
                     fab.hide()
                     }
             }
-            when(data.date_start) {
-                null -> {
-                    text_date_end.text = "Pendiente"
-                    text_date_start.text = "Pendiente"
-                }
-                else -> {
-                    val localDateTime = LocalDateTime.parse(data.date_start)
-                    val localDateTime_1 = LocalDateTime.parse(data.date_end)
-                    val formatter = DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
-                    val output = formatter.format(localDateTime)
-                    val output_1 = formatter.format(localDateTime_1)
-                    text_date_end.text = output_1
-                    text_date_start.text = output
-                }
+
+            text_date_end.text = "Pendiente"
+            text_date_start.text = "Pendiente"
+
+            val formatter = DateTimeFormatter.ofPattern("dd MM yyyy HH:mm")
+
+
+            if(data.date_start != null){
+                val localDateTime = LocalDateTime.parse(data.date_start)
+                val output = formatter.format(localDateTime)
+                text_date_start.text = output
             }
+            if(data.date_end != null){
+                val localDateTime_1 = LocalDateTime.parse(data.date_end)
+                val output_1 = formatter.format(localDateTime_1)
+                text_date_end.text = output_1
+            }
+
             when(data.difficulty_id){
                 null -> { chart_id.setProgress(0f, true) }
                 else -> {
@@ -127,23 +131,11 @@ class StoryDetailActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
     }
-    fun reconnect(){
-        socket.disconnect()
-        reconnect_1()
-    }
-
-    fun reconnect_1(){
-        println("RECONECTANDO ----> ${  socket.isConnected }")
-            socket.connect()
-            sockets()
-    }
 
     fun sockets(){
 
-        socket.onError { throwable, response -> //reconnect()
-            }
+        socket.onError { throwable, response -> show_error(view = findViewById(android.R.id.content))}
         channel = socket.channel("story_detail:${story_id}")
-
         channel.onError {
             println("ERROR EN EL CHANNEL DDDDDDD:")
         }
@@ -195,10 +187,7 @@ class StoryDetailActivity : AppCompatActivity() {
         }
 
         channel.onClose {
-            println("CLOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         }
-
-
 
         channel.join()
             .receive("ok") { println("Join channel") }
@@ -262,7 +251,7 @@ class StoryDetailActivity : AppCompatActivity() {
             val elto = this.getItem(position) as story_detail_user
             val img = view!!.findViewById<ImageView>(R.id.image_user_team)
             Picasso.get()
-                .load("http://10.0.3.41:4000/api/user-image?id=${lista[position].id}")
+                .load("$api_url/user-image?id=${lista[position].id}")
                 .transform(CircleTransform())
                 .into(img)
             val name = view!!.findViewById<TextView>(R.id.name_team)

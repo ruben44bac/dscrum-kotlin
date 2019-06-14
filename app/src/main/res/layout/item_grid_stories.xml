@@ -9,8 +9,8 @@
 
     <ImageView
             android:id="@+id/image_difficulty"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="#121212"
     />
 
