@@ -9,13 +9,16 @@
         tools:context=".Activities.MindActivity">
     <ImageButton
             android:layout_width="150dp"
-            android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars[1]"
+            android:layout_height="150dp"
+            android:background="#12121200"
+            tools:srcCompat="@tools:sample/avatars[1]"
             app:layout_constraintEnd_toEndOf="parent" android:id="@+id/mind_image_1"
             android:layout_marginEnd="52dp" android:layout_marginTop="112dp"
             app:layout_constraintTop_toBottomOf="@+id/textView"/>
     <ImageButton
             android:layout_width="150dp"
-            android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars[1]"
+            android:layout_height="150dp"
+            android:background="#12121200" tools:srcCompat="@tools:sample/avatars[1]"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/mind_image_2"
             app:layout_constraintHorizontal_bias="0.901" android:layout_marginTop="24dp"
@@ -23,7 +26,8 @@
             android:layout_marginEnd="8dp"/>
     <ImageButton
             android:layout_width="150dp"
-            android:layout_height="150dp" tools:srcCompat="@tools:sample/avatars[1]"
+            android:layout_height="150dp"
+            android:background="#12121200" tools:srcCompat="@tools:sample/avatars[1]"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/mind_image_3"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"

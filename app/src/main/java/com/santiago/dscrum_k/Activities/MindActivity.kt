@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_mind.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.phoenixframework.PhxChannel
 import org.phoenixframework.PhxSocket
+import android.widget.ImageButton
+
+
 
 class MindActivity : AppCompatActivity() {
 
@@ -76,11 +79,24 @@ class MindActivity : AppCompatActivity() {
     }
 
     fun set_buttons(){
+
         if(list_mind.count() > 0){
-            Picasso.get()
-                .load("$api_url/mind-state-image?id=${list_mind[0].id}")
-                .transform(CircleTransform())
-                .into(mind_image_2)
+            runOnUiThread {
+                Picasso.get()
+                    .load("$api_url/mind-state-image?id=${list_mind[0].id}")
+                    .transform(CircleTransform())
+                    .into(mind_image_2)
+
+                Picasso.get()
+                    .load("$api_url/mind-state-image?id=${list_mind[1].id}")
+                    .transform(CircleTransform())
+                    .into(mind_image_1)
+
+                Picasso.get()
+                    .load("$api_url/mind-state-image?id=${list_mind[2].id}")
+                    .transform(CircleTransform())
+                    .into(mind_image_3)
+            }
         }
     }
 }
